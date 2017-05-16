@@ -1,4 +1,4 @@
-const world = [
+var world = [
             [2,2,2,2,2,2,2,2,2,2],
             [2,0,1,2,1,1,1,1,1,2],
             [2,1,1,2,1,2,2,2,1,2],
@@ -20,6 +20,8 @@ var pacman = {
 function displayWorld(){
     var output = '';
 
+    console.log("dipslaying world");
+    console.log(document.getElementById('world'));
     for (var i=0; i < world.length; i++){
         output += "<div class='row'>";
         for (var j=0; j < world[i].length; j++){
@@ -44,10 +46,6 @@ function displayScore(){
     document.getElementById('score').innerHTML = score;
 }
 
-displayWorld();
-displayPacman();
-displayScore();
-
 document.onkeydown = function(e){
     if (e.keyCode == 37 && world[pacman.y][pacman.x-1] != 2){
         pacman.x--;
@@ -71,3 +69,11 @@ document.onkeydown = function(e){
 
     displayPacman();
 };
+
+$(document).ready(function(){
+    
+    displayWorld();
+    displayPacman();
+    displayScore();
+    
+});
