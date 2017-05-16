@@ -87,6 +87,16 @@ function displayGhost() {
     document.getElementById('ghost').style.left = ghost.x*20+"px";
 }
 
+
+function checkCollision() {
+    if (pacman.x === ghost.x && ghost.y === pacman.y){
+        alert("You got eaten!");
+        clearInterval(movement);
+        clearInterval(ghostmove);
+        //throw new Error('Game over man!');
+    }
+}
+
 function moveGhost(){
     var direction = Math.floor(Math.random() * 4);
     // 0 = up, 1 = right, 2 = down, 3 = left
@@ -146,8 +156,10 @@ function moveGhost(){
             moveGhost();
         }
     }
-    
+
     displayGhost();
+
+    checkCollision();
     // if (world[pacman.y][pacman.x] == 1){
     //     world[pacman.y][pacman.x] = 0;
     //     score+=10;
@@ -215,6 +227,7 @@ function movePacman(e){
     }
 
     displayPacman();
+    checkCollision();
 }
 
 document.onkeydown = function(e){
@@ -226,11 +239,10 @@ document.onkeydown = function(e){
 };
 
 $(document).ready(function(){
-    
-    displayWorld();
-    displayPacman();
-    displayGhost();
-    setInterval(moveGhost, 400);
-    displayScore();
+        displayWorld();
+        displayPacman();
+        displayGhost();
+        ghostmove = setInterval(moveGhost, 400);
+        displayScore();
     
 });
