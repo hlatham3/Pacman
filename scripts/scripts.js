@@ -3,7 +3,7 @@ var world = [
             [2,0,1,2,1,1,1,1,1,2],
             [2,1,1,2,1,2,2,2,1,2],
             [2,1,1,2,1,2,1,2,1,2],
-            [2,1,1,2,1,2,1,2,1,2],
+            [0,1,1,2,1,2,1,2,1,0],
             [2,1,1,2,2,2,1,2,1,2],
             [2,1,1,1,1,1,1,2,1,2],
             [2,1,1,1,1,1,1,1,1,2],
@@ -16,6 +16,8 @@ var pacman = {
     x: 1,
     y: 1
 };
+
+var direction
 
 function displayWorld(){
     var output = '';
@@ -49,15 +51,25 @@ function displayScore(){
 document.onkeydown = function(e){
     if (e.keyCode == 37 && world[pacman.y][pacman.x-1] != 2){
         pacman.x--;
+        $('#pacman').css("transform","rotate(180deg)");
+        if(pacman.x==-1){
+            pacman.x = world[pacman.y].length-1;
+        }
     }
     else if(e.keyCode == 39 && world[pacman.y][pacman.x+1] != 2){
         pacman.x++;
+        $('#pacman').css("transform","rotate(0deg)");
+        if(pacman.x==world[pacman.y].length){
+            pacman.x = 0;
+        }
     }
     else if(e.keyCode == 38 && world[pacman.y-1][pacman.x] != 2){
         pacman.y--;
+        $('#pacman').css("transform","rotate(270deg)");
     }
     else if(e.keyCode == 40 && world[pacman.y+1][pacman.x] != 2){
         pacman.y++;
+        $('#pacman').css("transform","rotate(90deg)");
     }
     
     if (world[pacman.y][pacman.x] == 1){
